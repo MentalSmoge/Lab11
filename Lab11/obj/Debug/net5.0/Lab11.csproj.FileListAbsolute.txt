@@ -1,0 +1,16 @@
+E:\Study folder\Programming\Laba11\Lab11\obj\Debug\net5.0\Lab11.csproj.AssemblyReference.cache
+E:\Study folder\Programming\Laba11\Lab11\obj\Debug\net5.0\Lab11.GeneratedMSBuildEditorConfig.editorconfig
+E:\Study folder\Programming\Laba11\Lab11\obj\Debug\net5.0\Lab11.AssemblyInfoInputs.cache
+E:\Study folder\Programming\Laba11\Lab11\obj\Debug\net5.0\Lab11.AssemblyInfo.cs
+E:\Study folder\Programming\Laba11\Lab11\obj\Debug\net5.0\Lab11.csproj.CoreCompileInputs.cache
+E:\Study folder\Programming\Laba11\Lab11\bin\Debug\net5.0\Lab11.exe
+E:\Study folder\Programming\Laba11\Lab11\bin\Debug\net5.0\Lab11.deps.json
+E:\Study folder\Programming\Laba11\Lab11\bin\Debug\net5.0\Lab11.runtimeconfig.json
+E:\Study folder\Programming\Laba11\Lab11\bin\Debug\net5.0\Lab11.runtimeconfig.dev.json
+E:\Study folder\Programming\Laba11\Lab11\bin\Debug\net5.0\Lab11.dll
+E:\Study folder\Programming\Laba11\Lab11\bin\Debug\net5.0\ref\Lab11.dll
+E:\Study folder\Programming\Laba11\Lab11\bin\Debug\net5.0\Lab11.pdb
+E:\Study folder\Programming\Laba11\Lab11\obj\Debug\net5.0\Lab11.dll
+E:\Study folder\Programming\Laba11\Lab11\obj\Debug\net5.0\ref\Lab11.dll
+E:\Study folder\Programming\Laba11\Lab11\obj\Debug\net5.0\Lab11.pdb
+E:\Study folder\Programming\Laba11\Lab11\obj\Debug\net5.0\Lab11.genruntimeconfig.cache
