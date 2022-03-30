@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Lab11
@@ -284,7 +285,14 @@ namespace Lab11
 						Documents = HashtableClone(Documents);
 						break;
 					case 7:
-						log = HashtableFindValue(Documents);
+						if (Documents.Count <= 0)
+						{
+							log = new Log("Хэш-таблица пуста. Поиск невозможен. Пожалуйста, добавьте элементов", false);
+						}
+						else
+						{
+							log = HashtableFindValue(Documents);
+						}
 						break;
 					case 8:
 						exit = true;
@@ -294,7 +302,21 @@ namespace Lab11
 		}
 		static Log HashtableFindValue(Hashtable hashtable)
 		{
-			return new Log();
+			bool flag = false;
+			string key;
+			do
+			{
+				Menu.PrintColor("Введите ключ элемента");
+				key = Menu.GetInputString();
+				flag = hashtable.ContainsKey(key);
+				if (!flag)
+				{
+					Menu.PrintColor("Указанного ключа нет в таблице. Пожалуйста, введите существующий ключ", ConsoleColor.Red);
+				}
+			} while (!flag);
+			Document document = (Document)hashtable[key];
+			Log log = new Log(document.ToString(), true);
+			return log;
 		}
 		static Dictionary<string, Document> DictionaryAdd(Dictionary<string, Document> dictionary, ref Log log)
 		{
@@ -561,7 +583,14 @@ namespace Lab11
 						Documents = DictionaryClone(Documents);
 						break;
 					case 7:
-						log = DictionarySortAndFindValue(Documents);
+						if (Documents.Count <= 0)
+						{
+							log = new Log("Хэш-таблица пуста. Поиск невозможен. Пожалуйста, добавьте элементов", false);
+						}
+						else
+						{
+							log = DictionarySortAndFindValue(Documents);
+						}
 						break;
 					case 8:
 						exit = true;
@@ -571,6 +600,21 @@ namespace Lab11
 		}
 		static Log DictionarySortAndFindValue(Dictionary<string, Document> keyValuePairs)
 		{
+
+			bool flag = false;
+			string key;
+			do
+			{
+				Menu.PrintColor("Введите ключ элемента");
+				key = Menu.GetInputString();
+				flag = keyValuePairs.ContainsKey(key);
+				if (!flag)
+				{
+					Menu.PrintColor("Указанного ключа нет в таблице. Пожалуйста, введите существующий ключ", ConsoleColor.Red);
+				}
+			} while (!flag);
+			Document document = keyValuePairs[key];
+			Log log = new Log(document.ToString(), true);
 			return new Log();
 		}
 		static void MenuTestCollection()
@@ -594,17 +638,24 @@ namespace Lab11
 				{
 					case 1:
 						log = new Log("", ConsoleColor.Green);
+						testCollections.FindInsortedDic_docKey(ref log);
 						testCollections.FindInlist_invoice(ref log);
 						testCollections.FindInlist_string(ref log);
-						testCollections.FindInsortedDic_docKey(ref log);
 						testCollections.FindInsortedDic_stringKey(ref log);
 						testCollections.FindInsortedDic_docValue(ref log);
 						break;
 					case 2:
-						testCollections = testCollections.AddElement();
+						testCollections = testCollections.AddElement(ref log);
 						break;
 					case 3:
-						testCollections = testCollections.RemoveElement();
+						if (testCollections.list_invoice.Count <= 5)
+						{
+							log = new Log("Слишком мало элементов", false);
+						}
+						else
+						{
+							testCollections = testCollections.RemoveElement(ref log);
+						}
 						break;
 					case 4:
 						exit = true;

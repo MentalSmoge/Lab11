@@ -25,6 +25,15 @@ namespace Lab11
 			if (other == null) return false;
 			return (this.Date.Equals(other.Date) & this.CostOfDocument.Equals(other.CostOfDocument) & this.ProductsReciever.Equals(other.ProductsReciever) & this.ProductsGiver.Equals(other.ProductsGiver) & this.Products.Equals(other.Products) & this.WholeSum.Equals(other.WholeSum));
 		}
+		public override int CompareTo(object obj)//реализация интерфейса. Сортировка по дате
+		{
+			Document temp = (Document)obj;//приведение к типу Invoice
+			return this.Date.CompareTo(temp.Date);
+		}
+		public override int GetHashCode()
+		{
+			return HashCode.Combine(Date, CostOfDocument, WholeSum, products, receiver_name, giver_name);
+		}
 		public Document BaseDocument
 		{
 			get

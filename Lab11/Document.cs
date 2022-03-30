@@ -50,13 +50,12 @@ namespace Lab11
 		}
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(Date, CostOfDocument, WholeSum);
+			return HashCode.Combine(Date, CostOfDocument);
 		}
-		public int CompareTo(object obj)//реализация интерфейса. Сортировка по дате
+		public virtual int CompareTo(object obj)//реализация интерфейса. Сортировка по дате
 		{
 			Document temp = (Document)obj;//приведение к типу Document
-			if (this.Date > temp.Date | this.CostOfDocument > temp.CostOfDocument) return 1;
-			if (this.Date < temp.Date | this.CostOfDocument < temp.CostOfDocument) return -1;
+			return this.Date.CompareTo(temp.Date);
 			return 0;
 		}
 		public override string ToString()

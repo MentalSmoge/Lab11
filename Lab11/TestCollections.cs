@@ -9,7 +9,7 @@ namespace Lab11
 {
 	class TestCollections
 	{
-		List<Invoice> list_invoice = new List<Invoice>();
+		public List<Invoice> list_invoice = new List<Invoice>();
 		List<string> list_string = new List<string>();
 		SortedDictionary<Document, Invoice> sortedDic_doc = new SortedDictionary<Document, Invoice>();
 		SortedDictionary<string, Invoice> sortedDic_string = new SortedDictionary<string, Invoice>();
@@ -22,31 +22,59 @@ namespace Lab11
 		{
 			for (int i = 0; i < 1000; i++)
 			{
-				Invoice invoice = new Invoice();
-				if (i == 0)
+				Invoice invoice;
+				do
 				{
-					First = invoice.Clone();
+					invoice = new Invoice();
+				} while (list_invoice.Contains(invoice));
+				if (i == 1)
+				{
+					First = invoice;
 				}
 				if (i == 500)
 				{
-					Middle = invoice.Clone();
+					Middle = invoice;
 				}
 				if (i == 999)
 				{
-					Last = invoice.Clone();
+					Last = invoice;
 				}
-				list_invoice.Add(invoice.Clone());
+				list_invoice.Add(invoice);
 				list_string.Add(invoice.ToString());
-				sortedDic_doc.Add((Document)invoice.BaseDocument.Clone(), invoice.Clone());
+				sortedDic_doc.Add((Document)invoice.BaseDocument, invoice.Clone());
 				sortedDic_string.Add(invoice.ToString(), invoice.Clone());
 			}
 		}
-		public TestCollections RemoveElement()
+		public TestCollections RemoveElement(ref Log log)
 		{
+			list_invoice.Remove(First);
+			list_string.Remove(First.ToString());
+			sortedDic_doc.Remove(First.BaseDocument);
+			sortedDic_string.Remove(First.ToString());
+
+			log = new Log("Удален первый элемент", true);
+			First = list_invoice[0];
+			Middle = list_invoice[list_invoice.Count / 2];
+			Last = list_invoice[list_invoice.Count - 1];
 			return this;
 		}
-		public TestCollections AddElement()
+		public TestCollections AddElement(ref Log log)
 		{
+			Invoice invoice;
+			do
+			{
+				invoice = new Invoice();
+			} while (list_invoice.Contains(invoice));
+
+			list_invoice.Add(invoice);
+			list_string.Add(invoice.ToString());
+			sortedDic_doc.Add((Document)invoice.BaseDocument, invoice.Clone());
+			sortedDic_string.Add(invoice.ToString(), invoice.Clone());
+
+			log = new Log("Добавлен элемент", true);
+			First = list_invoice[0];
+			Middle = list_invoice[list_invoice.Count / 2];
+			Last = list_invoice[list_invoice.Count - 1];
 			return this;
 		}
 		//ДОБАВЛЕНИЕ И УДАЛЕНИЕ ЭЛЕМЕНТОВ
@@ -182,11 +210,13 @@ namespace Lab11
 			//создаем объект
 			Stopwatch stopwatch = new Stopwatch();
 			//засекаем время начала операции
-			Document find = (Document)First.BaseDocument.Clone();
-			stopwatch.Start();
 
 
 			//ПОИСК ПЕРВОГО
+			Document find = null;
+			find = (Document)First.BaseDocument;
+			stopwatch.Start();
+			Menu.PrintColor("Первый");
 			if (sortedDic_doc.ContainsKey(find))
 			{
 				log.message += "Найден\n";
@@ -202,7 +232,7 @@ namespace Lab11
 
 
 			//ПОИСК СЕРЕДИННОГО
-			find = (Document)Middle.BaseDocument.Clone();
+			find = (Document)Middle.BaseDocument;
 			stopwatch.Start();
 			if (sortedDic_doc.ContainsKey(find))
 			{
@@ -219,8 +249,9 @@ namespace Lab11
 
 
 			//ПОИСК ПОСЛЕДНЕГО
-			find = (Document)Last.BaseDocument.Clone();
+			find = (Document)Last.BaseDocument;
 			stopwatch.Start();
+			Menu.PrintColor("Последний");
 			if (sortedDic_doc.ContainsKey(find))
 			{
 				log.message += "Найден\n";
@@ -235,8 +266,9 @@ namespace Lab11
 
 
 
+
 			//ПОИСК НЕ В СПИСКЕ
-			find = (Document)NotInTheList.BaseDocument.Clone();
+			find = (Document)NotInTheList;
 			stopwatch.Start();
 			if (sortedDic_doc.ContainsKey(find))
 			{
